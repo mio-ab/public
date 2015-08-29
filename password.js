@@ -61,5 +61,5 @@ function password( Length, Letters, Numbers, Punctuations ) {
     }
     
     // If all required sets were NOT used, recursively request a new string to be generated
-    return (SetsUsed === false ? password( Length, Letters, Numbers, Punctuations ) : Output);
+    return (SetsUsed === false ? this( Length, Letters, Numbers, Punctuations ) : Output);
 }

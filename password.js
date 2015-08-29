@@ -21,18 +21,18 @@ function password( Length, Letters, Numbers, Punctuations ) {
 
     // Check if the set with lower case letters is required 
     if ( Letters !== false ) {
-        Chars.push({"Set" : "a b c d e f g h i j k l m n o p q r s t u v w x y z".split(" "), "Used" : false});
-    	Chars.push({"Set" : "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" "), "Used" : false});
+        Chars.push({"Set" : "abcdefghijklmnopqrstuvwxyz".split(""), "Used" : false});
+    	Chars.push({"Set" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""), "Used" : false});
     }
 
     // Check if the set with numbers is required 
     if ( Numbers !== false ) {
-        Chars.push({"Set" : "0 1 2 3 4 5 6 7 8 9".split(" "), "Used" : false });
+        Chars.push({"Set" : "0123456789".split(""), "Used" : false });
     }
     
     // Check if the set with punctuations is required 
     if ( Punctuations !== false ) {
-        Chars.push({Set : "§ ! @ # % & ( ) { } [ ] < > = ?  + * ^ ~ - _ . : , ; / | £ $ € ¥ ' ´ `".split(" "), Used : false });
+        Chars.push({Set : "! @ # % & ( ) { } [ ] < > = ?  + * ^ ~ - _ . : , ; / | $ ' `".split(" "), Used : false });
     }
     
     // Make sure that len value is at least the same as the number of character sets to be used.

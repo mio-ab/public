@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width"/>
+	<title>Lazy loading utan javascript</title>
+	
+	<style>
+		.item { border: 1px solid #444; padding: 8px; display: inline-block; margin: 0px 10px 10px 0px; }
+		.item img { width: 300px; }
+	</style>
+	<noscript>
+		<style>
+			.lazy-img { display: none; }
+		</style>
+	</noscript>
+	
+</head>
+<body>
+	<div class="item" id="dalarö">
+		<img src="lazy.jpg" class="lazy-img" data-src="image1.jpg">
+		<noscript><img src="image1.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image2.jpg">
+		<noscript><img src="image2.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image3.jpg">
+		<noscript><img src="image3.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image4.jpg">
+		<noscript><img src="image4.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image5.jpg">
+		<noscript><img src="image5.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image6.jpg">
+		<noscript><img src="image6.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image7.jpg">
+		<noscript><img src="image7.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image8.jpg">
+		<noscript><img src="image8.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image9.jpg">
+		<noscript><img src="image9.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image10.jpg">
+		<noscript><img src="image10.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image11.jpg">
+		<noscript><img src="image11.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image12.jpg">
+		<noscript><img src="image12.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image13.jpg">
+		<noscript><img src="image13.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image14.jpg">
+		<noscript><img src="image14.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image15.jpg">
+		<noscript><img src="image15.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image16.jpg">
+		<noscript><img src="image16.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image17.jpg">
+		<noscript><img src="image17.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image18.jpg">
+		<noscript><img src="image18.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image19.jpg">
+		<noscript><img src="image19.jpg"></noscript>
+	</div>
+	<div class="item">
+		<img src="lazy.jpg" class="lazy-img" data-src="image20.jpg">
+		<noscript><img src="image20.jpg"></noscript>
+	</div>
+	
+	<script>
+		var lazy_imgs = [];
+		
+		regListener('load', setLazy);
+		regListener('load', lazyLoad);
+		regListener('scroll', lazyLoad);
+		regListener('resize', lazyLoad);
+		
+		function setLazy(){
+			lazy = document.getElementsByClassName('lazy-img');
+			console.log('Found ' + lazy.length + ' lazy images');
+		}
+		
+		function lazyLoad(){
+			for(var i=0; i<lazy.length; i++){
+				if(isInViewport(lazy[i]) && lazy[i].getAttribute('data-src')){
+					lazy[i].src = lazy[i].getAttribute('data-src');
+					lazy[i].removeAttribute('data-src');
+				}
+			}
+			lazy = Array.prototype.filter.call(lazy, function(l){ return l.getAttribute('data-src');});
+		}
+		
+		function isInViewport(el){
+			var a = el.getBoundingClientRect();
+			return (
+				a.bottom >= 0 && 
+				a.right >= 0 && 
+				a.top <= (window.innerHeight || document.documentElement.clientHeight) && 
+				a.left <= (window.innerWidth || document.documentElement.clientWidth)
+			);
+		}
+		
+		function regListener(evt, func) {
+			if (window.addEventListener) {
+				window.addEventListener(evt, func);
+			}
+		}
+	</script>
+</body>
+</html>
